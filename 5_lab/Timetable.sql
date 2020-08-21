@@ -1,12 +1,12 @@
-/*Табло*/
-/*Время вылета по расписанию, Рейс, Авиакомпания, Город назначения, Аэропорт назначения, Статус рейса*/
+/*РўР°Р±Р»Рѕ*/
+/*Р’СЂРµРјСЏ РІС‹Р»РµС‚Р° РїРѕ СЂР°СЃРїРёСЃР°РЅРёСЋ, Р РµР№СЃ, РђРІРёР°РєРѕРјРїР°РЅРёСЏ, Р“РѕСЂРѕРґ РЅР°Р·РЅР°С‡РµРЅРёСЏ, РђСЌСЂРѕРїРѕСЂС‚ РЅР°Р·РЅР°С‡РµРЅРёСЏ, РЎС‚Р°С‚СѓСЃ СЂРµР№СЃР°*/
 
 IF (OBJECT_ID('Timetable') IS NOT NULL)
 	DROP VIEW Timetable;
 
 GO
 
-CREATE VIEW Timetable (Время_вылета_по_расписанию, Рейс, Авиакомпания, Город_назначения, Аэропорт_назначения, Статус_рейса)
+CREATE VIEW Timetable (Р’СЂРµРјСЏ_РІС‹Р»РµС‚Р°_РїРѕ_СЂР°СЃРїРёСЃР°РЅРёСЋ, Р РµР№СЃ, РђРІРёР°РєРѕРјРїР°РЅРёСЏ, Р“РѕСЂРѕРґ_РЅР°Р·РЅР°С‡РµРЅРёСЏ, РђСЌСЂРѕРїРѕСЂС‚_РЅР°Р·РЅР°С‡РµРЅРёСЏ, РЎС‚Р°С‚СѓСЃ_СЂРµР№СЃР°)
 AS
 SELECT Departure_time_planned, Flight_name, Air_company.Name, City.City_name, CONCAT (Airport.Airport_name, ' (', Destination_airport, ')'), Flight_status.[Description]
 FROM Flight INNER JOIN Air_company ON Flight.Air_company_ID = Air_company.Air_company_ID

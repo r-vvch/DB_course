@@ -1,12 +1,12 @@
-/*Разника запланированного и фактического*/
-/*Рейс, Номер_рейса, Разница_регистрации, Разница_посадки, Разница_взлёта, Разница_прибытия*/
+/*Р Р°Р·РЅРёРєР° Р·Р°РїР»Р°РЅРёСЂРѕРІР°РЅРЅРѕРіРѕ Рё С„Р°РєС‚РёС‡РµСЃРєРѕРіРѕ*/
+/*Р РµР№СЃ, РќРѕРјРµСЂ_СЂРµР№СЃР°, Р Р°Р·РЅРёС†Р°_СЂРµРіРёСЃС‚СЂР°С†РёРё, Р Р°Р·РЅРёС†Р°_РїРѕСЃР°РґРєРё, Р Р°Р·РЅРёС†Р°_РІР·Р»С‘С‚Р°, Р Р°Р·РЅРёС†Р°_РїСЂРёР±С‹С‚РёСЏ*/
 
 IF (OBJECT_ID('Delta') IS NOT NULL)
 	DROP VIEW Delta;
 
 GO
 
-CREATE VIEW Delta (Дата, Номер_рейса, Разница_регистрации, Разница_посадки, Разница_взлёта, Разница_прибытия)
+CREATE VIEW Delta (Р”Р°С‚Р°, РќРѕРјРµСЂ_СЂРµР№СЃР°, Р Р°Р·РЅРёС†Р°_СЂРµРіРёСЃС‚СЂР°С†РёРё, Р Р°Р·РЅРёС†Р°_РїРѕСЃР°РґРєРё, Р Р°Р·РЅРёС†Р°_РІР·Р»С‘С‚Р°, Р Р°Р·РЅРёС†Р°_РїСЂРёР±С‹С‚РёСЏ)
 AS
 SELECT  Flight.Departure_date, Flight_name,
 		--CONCAT(CAST((ABS(CAST((DATEDIFF(hour, Departure_time_planned, Arrival_time_planned)) AS int)) - 1) AS varchar(50)), ':',CAST((ABS(CAST((DATEDIFF(minute, Departure_time_planned, Arrival_time_planned)) AS int))) - CAST((ABS(CAST((DATEDIFF(hour, Departure_time_planned, Arrival_time_planned)) AS int)) - 1)*60 AS int),

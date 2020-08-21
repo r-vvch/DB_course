@@ -1,4 +1,4 @@
---Пример "грязного" чтения 1 часть
+--РџСЂРёРјРµСЂ "РіСЂСЏР·РЅРѕРіРѕ" С‡С‚РµРЅРёСЏ 1 С‡Р°СЃС‚СЊ
 USE Airport
 
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED

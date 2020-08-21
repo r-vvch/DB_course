@@ -1,4 +1,4 @@
---Фантом 1
+--Р¤Р°РЅС‚РѕРј 1
 USE Airport
 
 SET TRAN ISOLATION LEVEL  READ UNCOMMITTED

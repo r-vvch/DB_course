@@ -1,5 +1,5 @@
-/*Все полёты данного самолёта*/
-/*Город назначения, Аэропорт, Дата, Время вылета, Время прилёта, Статус рейса*/
+/*Р’СЃРµ РїРѕР»С‘С‚С‹ РґР°РЅРЅРѕРіРѕ СЃР°РјРѕР»С‘С‚Р°*/
+/*Р“РѕСЂРѕРґ РЅР°Р·РЅР°С‡РµРЅРёСЏ, РђСЌСЂРѕРїРѕСЂС‚, Р”Р°С‚Р°, Р’СЂРµРјСЏ РІС‹Р»РµС‚Р°, Р’СЂРµРјСЏ РїСЂРёР»С‘С‚Р°, РЎС‚Р°С‚СѓСЃ СЂРµР№СЃР°*/
 
 IF (OBJECT_ID('Airplane_info') IS NOT NULL)
 	DROP VIEW Airplane_info;
@@ -8,7 +8,7 @@ IF (OBJECT_ID('Airplane_info') IS NOT NULL)
 
 GO
 
-CREATE VIEW Airplane_info (Город_назначения, Аэропорт, Дата, Время_вылета, Время_прилёта, Статус_рейса)
+CREATE VIEW Airplane_info (Р“РѕСЂРѕРґ_РЅР°Р·РЅР°С‡РµРЅРёСЏ, РђСЌСЂРѕРїРѕСЂС‚, Р”Р°С‚Р°, Р’СЂРµРјСЏ_РІС‹Р»РµС‚Р°, Р’СЂРµРјСЏ_РїСЂРёР»С‘С‚Р°, РЎС‚Р°С‚СѓСЃ_СЂРµР№СЃР°)
 AS
 SELECT  City.City_name, CONCAT (Airport.Airport_name, ' (', Destination_airport, ')'), Departure_date, Departure_time_planned,
 		Arrival_time_planned, Flight_status.[Description]
@@ -23,7 +23,7 @@ WHERE Airplane.Airplane_number = '8931'
 GO
 
 /*
-CREATE VIEW Airplane_info1 (Город_назначения, Аэропорт, Дата, Время_вылета, Время_прилёта, Статус_рейса)
+CREATE VIEW Airplane_info1 (Р“РѕСЂРѕРґ_РЅР°Р·РЅР°С‡РµРЅРёСЏ, РђСЌСЂРѕРїРѕСЂС‚, Р”Р°С‚Р°, Р’СЂРµРјСЏ_РІС‹Р»РµС‚Р°, Р’СЂРµРјСЏ_РїСЂРёР»С‘С‚Р°, РЎС‚Р°С‚СѓСЃ_СЂРµР№СЃР°)
 AS
 SELECT  City.City_name, CONCAT (Airport.Airport_name, ' (', Destination_airport, ')'), Departure_date, Departure_time_planned,
 		Arrival_time_planned, Flight_status.[Description]

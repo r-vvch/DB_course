@@ -1,4 +1,4 @@
---Неповторяющееся чтение 2
+--РќРµРїРѕРІС‚РѕСЂСЏСЋС‰РµРµСЃСЏ С‡С‚РµРЅРёРµ 2
 USE Airport
 
 SET TRAN ISOLATION LEVEL READ COMMITTED

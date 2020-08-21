@@ -1,4 +1,4 @@
---Потеря изменений часть 2
+--РџРѕС‚РµСЂСЏ РёР·РјРµРЅРµРЅРёР№ С‡Р°СЃС‚СЊ 2
 USE Airport
 
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED

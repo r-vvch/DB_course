@@ -1,5 +1,5 @@
-/*Все полёты по данному рейсу*/
-/*Дата, Время вылета, Время прилёта, Город, Аэропорт, Авиакомпания, Время в пути*/
+/*Р’СЃРµ РїРѕР»С‘С‚С‹ РїРѕ РґР°РЅРЅРѕРјСѓ СЂРµР№СЃСѓ*/
+/*Р”Р°С‚Р°, Р’СЂРµРјСЏ РІС‹Р»РµС‚Р°, Р’СЂРµРјСЏ РїСЂРёР»С‘С‚Р°, Р“РѕСЂРѕРґ, РђСЌСЂРѕРїРѕСЂС‚, РђРІРёР°РєРѕРјРїР°РЅРёСЏ, Р’СЂРµРјСЏ РІ РїСѓС‚Рё*/
 
 IF (OBJECT_ID('Flight_info') IS NOT NULL)
 	DROP VIEW Flight_info;
@@ -9,7 +9,7 @@ GO
 /*SELECT CONCAT(CAST((CAST((DATEDIFF(hour, Departure_time_planned, Arrival_time_planned)) AS int) - 1) AS varchar(50)), ':',CAST((DATEDIFF(minute, Departure_time_planned, Arrival_time_planned)) AS int) - (CAST((DATEDIFF(hour, Departure_time_planned, Arrival_time_planned)) AS int) - 1)*60)
 FROM Flight*/
 
-CREATE VIEW Flight_info (Дата, Время_вылета, Время_прилёта, Город, Аэропорт, Авиакомпания, Время_в_пути)
+CREATE VIEW Flight_info (Р”Р°С‚Р°, Р’СЂРµРјСЏ_РІС‹Р»РµС‚Р°, Р’СЂРµРјСЏ_РїСЂРёР»С‘С‚Р°, Р“РѕСЂРѕРґ, РђСЌСЂРѕРїРѕСЂС‚, РђРІРёР°РєРѕРјРїР°РЅРёСЏ, Р’СЂРµРјСЏ_РІ_РїСѓС‚Рё)
 AS
 SELECT Departure_date, Departure_time_planned, Arrival_time_planned, City.City_name, CONCAT (Airport.Airport_name, ' (', Destination_airport, ')'), Air_company.Name, CONCAT(RIGHT('00' + CAST(ABS(CAST(DATEDIFF(minute, Departure_time_planned, Arrival_time_planned) AS INT)/60) AS varchar(50)), 2), ':', RIGHT('00' + CAST(ABS(CAST(DATEDIFF(minute, Departure_time_planned, Arrival_time_planned) AS INT)%60) AS varchar(50)), 2))
 FROM Flight INNER JOIN Air_company ON Flight.Air_company_ID = Air_company.Air_company_ID

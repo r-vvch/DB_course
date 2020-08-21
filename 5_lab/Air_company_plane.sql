@@ -1,12 +1,12 @@
-/*Воздушные суда авиакомпаний (обслуживаемые в данном аэропорте)*/
-/*Авиакомпания, № Самолёта, Модель*/
+/*Р’РѕР·РґСѓС€РЅС‹Рµ СЃСѓРґР° Р°РІРёР°РєРѕРјРїР°РЅРёР№ (РѕР±СЃР»СѓР¶РёРІР°РµРјС‹Рµ РІ РґР°РЅРЅРѕРј Р°СЌСЂРѕРїРѕСЂС‚Рµ)*/
+/*РђРІРёР°РєРѕРјРїР°РЅРёСЏ, в„– РЎР°РјРѕР»С‘С‚Р°, РњРѕРґРµР»СЊ*/
 
 IF (OBJECT_ID('Air_company_plane') IS NOT NULL)
 	DROP VIEW Air_company_plane;
 
 GO
 
-CREATE VIEW Air_company_plane (Авиакомпания, Номер_самолёта, Модель)
+CREATE VIEW Air_company_plane (РђРІРёР°РєРѕРјРїР°РЅРёСЏ, РќРѕРјРµСЂ_СЃР°РјРѕР»С‘С‚Р°, РњРѕРґРµР»СЊ)
 AS
 SELECT Air_company.Name, Airplane.Airplane_ID, Model.Name
 FROM Flight INNER JOIN Air_company ON Flight.Air_company_ID = Air_company.Air_company_ID

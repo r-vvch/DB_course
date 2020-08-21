@@ -52,9 +52,9 @@ IF EXISTS (SELECT * FROM sys.objects WHERE ([type] = 'P' AND name = 'Planned'))
 
 GO
 
-/*Процедура заполнения таблиц*/
+/*РџСЂРѕС†РµРґСѓСЂР° Р·Р°РїРѕР»РЅРµРЅРёСЏ С‚Р°Р±Р»РёС†*/
 
-/*Объявление полёта*/
+/*РћР±СЉСЏРІР»РµРЅРёРµ РїРѕР»С‘С‚Р°*/
 CREATE PROCEDURE Statement_1
 	@air_company INT,
 	@d_date DATE,
@@ -77,18 +77,18 @@ BEGIN
 		INSERT INTO Flight (Air_company_ID, Departure_date, Departure_time_planned, Arrival_time_planned, Flight_name, Airplane_ID, Destination_airport)
 			VALUES (@air_company, @d_date, @d_time, @a_time, @flight_name, (SELECT Airplane_ID FROM Airplane WHERE Airplane_number = @airplane), @destination);
 		INSERT INTO Flight_fact (Flight_ID, Status_ID)
-			VALUES (IDENT_CURRENT('Flight'), (SELECT Status_ID FROM Flight_status WHERE [Description] = 'Запланирован'));
-		SET @status = CONCAT('Рейс успешно зарегистрирован с ID = ', CAST(IDENT_CURRENT('Flight') AS varchar(50)));
+			VALUES (IDENT_CURRENT('Flight'), (SELECT Status_ID FROM Flight_status WHERE [Description] = 'Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅ'));
+		SET @status = CONCAT('Р РµР№СЃ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ СЃ ID = ', CAST(IDENT_CURRENT('Flight') AS varchar(50)));
 	END
 	ELSE
 	BEGIN
-		SET @status = 'Ошибка: рейс уже существует';
+		SET @status = 'РћС€РёР±РєР°: СЂРµР№СЃ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚';
 	END;
 RETURN
 END;
 GO
 
-/*Объявление всех сидений*/
+/*РћР±СЉСЏРІР»РµРЅРёРµ РІСЃРµС… СЃРёРґРµРЅРёР№*/
 CREATE PROCEDURE Statement_2
 	@flight INT,
 	@seat VARCHAR(50),
@@ -99,7 +99,7 @@ BEGIN
 END;
 GO
 
-/*Объявление всех купивших билеты*/
+/*РћР±СЉСЏРІР»РµРЅРёРµ РІСЃРµС… РєСѓРїРёРІС€РёС… Р±РёР»РµС‚С‹*/
 CREATE PROCEDURE Statement_3
 	@flight INT,
 	@surname VARCHAR(50),
@@ -118,17 +118,17 @@ BEGIN
 			VALUES (@flight, @surname, @given_name, @parentage, @birth, @passport, @class, @nationality,
 			 (SELECT Status_ID
 																						 FROM Passenger_status
-																	  WHERE Passenger_status.[Description] = 'Куплен билет'))
-		SET @status = 'Пассажир успешно зарегистрирован на данный рейс';
+																	  WHERE Passenger_status.[Description] = 'РљСѓРїР»РµРЅ Р±РёР»РµС‚'))
+		SET @status = 'РџР°СЃСЃР°Р¶РёСЂ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РЅР° РґР°РЅРЅС‹Р№ СЂРµР№СЃ';
 	END
 	ELSE
 	BEGIN
-		SET @status = 'Ошибка: пассажир уже зарегистрирован на данный рейс';
+		SET @status = 'РћС€РёР±РєР°: РїР°СЃСЃР°Р¶РёСЂ СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РЅР° РґР°РЅРЅС‹Р№ СЂРµР№СЃ';
 	END
 END;
 GO
 
-/*Регистрация багажа*/
+/*Р РµРіРёСЃС‚СЂР°С†РёСЏ Р±Р°РіР°Р¶Р°*/
 CREATE PROCEDURE Luggage_reg
 	@passenger INT,
 	@weight REAL,
@@ -138,7 +138,7 @@ AS
 BEGIN
 IF (SELECT Status_ID FROM Flight_fact WHERE Flight_fact.Flight_ID = 
 (SELECT Flight_ID FROM Passenger WHERE Passenger_ID = @passenger)) =
-	(SELECT Status_ID FROM Flight_status WHERE Flight_status.[Description] = 'Идёт регистрация')
+	(SELECT Status_ID FROM Flight_status WHERE Flight_status.[Description] = 'РРґС‘С‚ СЂРµРіРёСЃС‚СЂР°С†РёСЏ')
 	BEGIN
 		INSERT INTO Luggage (Passenger_ID, [Weight]) VALUES (@passenger, @weight);
 		IF @weight < (SELECT Overweight FROM Flight WHERE (Flight.Flight_ID = (SELECT Flight_ID FROM Passenger WHERE Passenger_ID = @passenger)))
@@ -147,24 +147,24 @@ IF (SELECT Status_ID FROM Flight_fact WHERE Flight_fact.Flight_ID =
 			SET Passenger.Overweight = 0,
 				Passenger.Status_ID = (SELECT Status_ID
 										FROM Passenger_status
-										WHERE Passenger_status.[Description] = 'Зарегистрирован')
+										WHERE Passenger_status.[Description] = 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ')
 			WHERE Passenger.Passenger_ID = @passenger;
-			SET @pass_status = 'Пассажир успешно зарегистрирован';
-			SET @luggage_status = 'Багаж успешно зарегистрирован';
+			SET @pass_status = 'РџР°СЃСЃР°Р¶РёСЂ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ';
+			SET @luggage_status = 'Р‘Р°РіР°Р¶ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ';
 		END;
 		ELSE
 		BEGIN
 			UPDATE Passenger
 			SET Passenger.Overweight = 1
 			WHERE Passenger.Passenger_ID = @passenger;
-			SET @pass_status = 'Пассажиру необходимо оплатить перевес';
-			SET @luggage_status = 'Перевес';
+			SET @pass_status = 'РџР°СЃСЃР°Р¶РёСЂСѓ РЅРµРѕР±С…РѕРґРёРјРѕ РѕРїР»Р°С‚РёС‚СЊ РїРµСЂРµРІРµСЃ';
+			SET @luggage_status = 'РџРµСЂРµРІРµСЃ';
 		END;
 	END;
 END;
 GO
 
-/*Установка отсечки перегруза для каждого рейса*/
+/*РЈСЃС‚Р°РЅРѕРІРєР° РѕС‚СЃРµС‡РєРё РїРµСЂРµРіСЂСѓР·Р° РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР№СЃР°*/
 CREATE PROCEDURE Overweight_setup
 	@flight INT,
 	@weight REAL
@@ -176,7 +176,7 @@ BEGIN
 END;
 GO
 
-/*Присваивание гейта каждому рейсу*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ РіРµР№С‚Р° РєР°Р¶РґРѕРјСѓ СЂРµР№СЃСѓ*/
 CREATE PROCEDURE Gate_setup
 	@flight INT,
 	@gate TINYINT
@@ -188,7 +188,7 @@ BEGIN
 END;
 GO
 
-/*Присваивание гейта каждому пассажиру*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ РіРµР№С‚Р° РєР°Р¶РґРѕРјСѓ РїР°СЃСЃР°Р¶РёСЂСѓ*/
 CREATE PROCEDURE Passenger_gate
 	@passenger INT,
 	@gate TINYINT
@@ -200,7 +200,7 @@ BEGIN
 END;
 GO
 
-/*Присваивание стойки регистрации каждому пассажиру*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ СЃС‚РѕР№РєРё СЂРµРіРёСЃС‚СЂР°С†РёРё РєР°Р¶РґРѕРјСѓ РїР°СЃСЃР°Р¶РёСЂСѓ*/
 CREATE PROCEDURE Registration_desk_setup
 	@flight INT,
 	@desk INT
@@ -212,7 +212,7 @@ BEGIN
 END;
 GO
 
-/*Регистрация пассажира на рейс*/
+/*Р РµРіРёСЃС‚СЂР°С†РёСЏ РїР°СЃСЃР°Р¶РёСЂР° РЅР° СЂРµР№СЃ*/
 CREATE PROCEDURE Passenger_registration
 	@passenger INT,
 	@seat INT,
@@ -220,7 +220,7 @@ CREATE PROCEDURE Passenger_registration
 AS
 BEGIN
 IF (SELECT Status_ID FROM Flight_fact WHERE Flight_fact.Flight_ID = (SELECT Flight_ID FROM Passenger WHERE Passenger_ID = @passenger)) =
-	(SELECT Status_ID FROM Flight_status WHERE Flight_status.[Description] = 'Идёт регистрация')
+	(SELECT Status_ID FROM Flight_status WHERE Flight_status.[Description] = 'РРґС‘С‚ СЂРµРіРёСЃС‚СЂР°С†РёСЏ')
 	BEGIN
 		IF (SELECT Busy FROM Seats WHERE Seats.Seat_ID = @seat) IS NULL
 		BEGIN
@@ -228,22 +228,22 @@ IF (SELECT Status_ID FROM Flight_fact WHERE Flight_fact.Flight_ID = (SELECT Flig
 			SET Seat_ID = @seat,
 				Status_ID = (SELECT Status_ID
 							 FROM Passenger_status
-							 WHERE Passenger_status.[Description] = 'Выделено место')
+							 WHERE Passenger_status.[Description] = 'Р’С‹РґРµР»РµРЅРѕ РјРµСЃС‚Рѕ')
 			WHERE Passenger.Passenger_ID = @passenger;
-			SET @status = 'Место успешно выделено';
+			SET @status = 'РњРµСЃС‚Рѕ СѓСЃРїРµС€РЅРѕ РІС‹РґРµР»РµРЅРѕ';
 			UPDATE Seats
 			SET Busy = 1
 			WHERE Seats.Seat_ID = @seat
 		END
 		ELSE
 		BEGIN
-			SET @status = 'Ошибка: место уже занято';
+			SET @status = 'РћС€РёР±РєР°: РјРµСЃС‚Рѕ СѓР¶Рµ Р·Р°РЅСЏС‚Рѕ';
 		END;
 	END;
 END;
 GO
 
-/*Запланированное*/
+/*Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅРЅРѕРµ*/
 CREATE PROCEDURE Planned
 	@flight INT,
 	@reg_begin TIME(0),
@@ -261,7 +261,7 @@ BEGIN
 END;
 GO
 
-/*Начало регистрации*/
+/*РќР°С‡Р°Р»Рѕ СЂРµРіРёСЃС‚СЂР°С†РёРё*/
 CREATE PROCEDURE Reg_begin
 	@flight INT,
 	@reg_begin TIME(7)
@@ -271,12 +271,12 @@ BEGIN
 	SET Reg_begin_fact = @reg_begin,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Идёт регистрация')
+					 WHERE Flight_status.[Description] = 'РРґС‘С‚ СЂРµРіРёСЃС‚СЂР°С†РёСЏ')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
-/*Конец регистрации*/
+/*РљРѕРЅРµС† СЂРµРіРёСЃС‚СЂР°С†РёРё*/
 CREATE PROCEDURE Reg_end
 	@flight INT,
 	@reg_end TIME(7)
@@ -286,12 +286,12 @@ BEGIN
 	SET Reg_end_fact = @reg_end,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Регистрация закончена')
+					 WHERE Flight_status.[Description] = 'Р РµРіРёСЃС‚СЂР°С†РёСЏ Р·Р°РєРѕРЅС‡РµРЅР°')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
-/*Начало посадки*/
+/*РќР°С‡Р°Р»Рѕ РїРѕСЃР°РґРєРё*/
 CREATE PROCEDURE Boarding_begin
 	@flight INT,
 	@b_begin TIME(0)
@@ -301,12 +301,12 @@ BEGIN
 	SET Boarding_begin_fact = @b_begin,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Идёт посадка')
+					 WHERE Flight_status.[Description] = 'РРґС‘С‚ РїРѕСЃР°РґРєР°')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
-/*Конец посадки*/
+/*РљРѕРЅРµС† РїРѕСЃР°РґРєРё*/
 CREATE PROCEDURE Boarding_end
 	@flight INT,
 	@b_end TIME(0),
@@ -318,12 +318,12 @@ BEGIN
 		Final_call = @f_call,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Посадка закончена')
+					 WHERE Flight_status.[Description] = 'РџРѕСЃР°РґРєР° Р·Р°РєРѕРЅС‡РµРЅР°')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
-/*Вылет*/
+/*Р’С‹Р»РµС‚*/
 CREATE PROCEDURE Departure
 	@flight INT,
 	@d_time TIME(0)
@@ -333,12 +333,12 @@ BEGIN
 	SET Departure_time_fact = @d_time,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Вылетел')
+					 WHERE Flight_status.[Description] = 'Р’С‹Р»РµС‚РµР»')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
-/*Прилёт*/
+/*РџСЂРёР»С‘С‚*/
 CREATE PROCEDURE Arrival
 	@flight INT,
 	@a_time TIME(0)
@@ -348,13 +348,13 @@ BEGIN
 	SET Arrival_time_fact = @a_time,
 		Status_ID = (SELECT Status_ID
 					 FROM Flight_status
-					 WHERE Flight_status.[Description] = 'Совершил посадку')
+					 WHERE Flight_status.[Description] = 'РЎРѕРІРµСЂС€РёР» РїРѕСЃР°РґРєСѓ')
 	WHERE Flight_ID = @flight;
 END;
 GO
 
 /*
-/*Объявление о переносе рейса*/
+/*РћР±СЉСЏРІР»РµРЅРёРµ Рѕ РїРµСЂРµРЅРѕСЃРµ СЂРµР№СЃР°*/
 CREATE PROCEDURE Statement_4_1
 	@flight INT,
 	@d_date DATE,
@@ -374,7 +374,7 @@ END;
 GO
 
 /*
-/*Объявление о замене самолёта*/
+/*РћР±СЉСЏРІР»РµРЅРёРµ Рѕ Р·Р°РјРµРЅРµ СЃР°РјРѕР»С‘С‚Р°*/
 CREATE PROCEDURE Statement_4_2
 	@flight INT,
 	@airplane INT,

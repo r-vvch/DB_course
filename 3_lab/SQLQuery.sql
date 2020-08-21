@@ -2,7 +2,7 @@ USE Airport
 
 GO
 
-/*Удаление связей*/
+/*РЈРґР°Р»РµРЅРёРµ СЃРІСЏР·РµР№*/
 IF EXISTS (SELECT * FROM sys.objects WHERE (type = 'F' AND name = 'FK_Luggage_Passenger'))
 BEGIN
 	ALTER TABLE dbo.Luggage DROP CONSTRAINT FK_Luggage_Passenger;
@@ -105,7 +105,7 @@ END
 
 GO
 
-/*Удаление таблиц*/
+/*РЈРґР°Р»РµРЅРёРµ С‚Р°Р±Р»РёС†*/
 IF EXISTS (SELECT * FROM sys.objects WHERE (type = 'U' AND name = 'Passenger_status'))
 	DROP TABLE Passenger_status;
 
@@ -158,7 +158,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE (type = 'U' AND name = 'Luggage'))
 DROP TABLE Luggage;
 GO
 
-/*Создание таблиц*/
+/*РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†*/
 CREATE TABLE Passenger_status(
 	Status_ID TINYINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Description] VARCHAR(50) NOT NULL);
@@ -260,7 +260,7 @@ CREATE TABLE Luggage(
 	[Weight] REAL);
 GO
 
-/*Создание связей*/
+/*РЎРѕР·РґР°РЅРёРµ СЃРІСЏР·РµР№*/
 ALTER TABLE Luggage
 ADD CONSTRAINT FK_Luggage_Passenger
 		FOREIGN KEY (Passenger_ID)
@@ -363,7 +363,7 @@ delete from Passenger;
 delete from Luggage;
 */
 
-/*Обнуление ID*/
+/*РћР±РЅСѓР»РµРЅРёРµ ID*/
 IF IDENT_CURRENT('Model') != 1
 	DBCC CHECKIDENT (Model, RESEED, 0)
 IF IDENT_CURRENT('Air_company') != 1
@@ -376,9 +376,9 @@ IF IDENT_CURRENT('Luggage') != 1
 	DBCC CHECKIDENT (Luggage, RESEED, 0)
 GO
 
-/*Заполнение таблиц*/
+/*Р—Р°РїРѕР»РЅРµРЅРёРµ С‚Р°Р±Р»РёС†*/
 
---Справочники
+--РЎРїСЂР°РІРѕС‡РЅРёРєРё
 SET IDENTITY_INSERT dbo.Country ON; 
 INSERT INTO Country (Country_ID, Country_name) VALUES (1, 'UK');
 INSERT INTO Country (Country_ID, Country_name) VALUES (2, 'France');
@@ -424,15 +424,15 @@ INSERT INTO Model (Model_ID, Name) VALUES (3, 'Airbus A319');
 SET IDENTITY_INSERT dbo.Model OFF;
 
 SET IDENTITY_INSERT dbo.Flight_status ON; 
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (1, 'Запланирован');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (2, 'Идёт регистрация');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (3, 'Регистрация закончена');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (4, 'Идёт посадка');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (5, 'Посадка закончена');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (6, 'Вылетел');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (7, 'Совершил посадку');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (8, 'Перенесён');
-INSERT INTO Flight_status (Status_ID, [Description]) VALUES (9, 'Заменён самолёт');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (1, 'Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅ');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (2, 'РРґС‘С‚ СЂРµРіРёСЃС‚СЂР°С†РёСЏ');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (3, 'Р РµРіРёСЃС‚СЂР°С†РёСЏ Р·Р°РєРѕРЅС‡РµРЅР°');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (4, 'РРґС‘С‚ РїРѕСЃР°РґРєР°');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (5, 'РџРѕСЃР°РґРєР° Р·Р°РєРѕРЅС‡РµРЅР°');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (6, 'Р’С‹Р»РµС‚РµР»');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (7, 'РЎРѕРІРµСЂС€РёР» РїРѕСЃР°РґРєСѓ');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (8, 'РџРµСЂРµРЅРµСЃС‘РЅ');
+INSERT INTO Flight_status (Status_ID, [Description]) VALUES (9, 'Р—Р°РјРµРЅС‘РЅ СЃР°РјРѕР»С‘С‚');
 SET IDENTITY_INSERT dbo.Flight_status OFF;
 
 SET IDENTITY_INSERT dbo.Class ON; 
@@ -443,13 +443,13 @@ SET IDENTITY_INSERT dbo.Class OFF;
 --INSERT INTO Class ([Description]) VALUES ('Lux');
 
 SET IDENTITY_INSERT dbo.Passenger_status ON; 
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (1, 'Куплен билет');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (2, 'Выделено место');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (3, 'Зарегистрирован');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (4, 'Отменён');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (5, 'Прошёл ОСБ');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (6, 'Не прошёл ОСБ');
-INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (7, 'Осуществил посадку');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (1, 'РљСѓРїР»РµРЅ Р±РёР»РµС‚');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (2, 'Р’С‹РґРµР»РµРЅРѕ РјРµСЃС‚Рѕ');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (3, 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (4, 'РћС‚РјРµРЅС‘РЅ');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (5, 'РџСЂРѕС€С‘Р» РћРЎР‘');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (6, 'РќРµ РїСЂРѕС€С‘Р» РћРЎР‘');
+INSERT INTO Passenger_status (Status_ID, [Description]) VALUES (7, 'РћСЃСѓС‰РµСЃС‚РІРёР» РїРѕСЃР°РґРєСѓ');
 SET IDENTITY_INSERT dbo.Passenger_status OFF;
 
 SET IDENTITY_INSERT dbo.Gate ON; 
@@ -490,9 +490,9 @@ SET IDENTITY_INSERT dbo.Registration_desk OFF;
 GO
 
 
---Заполняемое процедурами
+--Р—Р°РїРѕР»РЅСЏРµРјРѕРµ РїСЂРѕС†РµРґСѓСЂР°РјРё
 
-/*Заявление рейса*/
+/*Р—Р°СЏРІР»РµРЅРёРµ СЂРµР№СЃР°*/
 DECLARE @status_out varchar(50);
 EXEC Statement_1 1, '2018-10-28', '9:40', '13:30', 'DP 811', 8931, 1, 'PSA', @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -502,11 +502,11 @@ EXEC Statement_1 2, '2018-10-28', '10:30', '12:10', 'UT 715', 2361, 2, 'RIX', @s
 PRINT @status_out;
 EXEC Statement_1 3, '2018-10-28', '15:30', '18:40', 'TK 418', 5531, 1, 'IST', @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_1 4, '2018-10-28', '17:55', '19:20', 'СУ 6032', 3645, 3, 'LED', @status = @status_out OUTPUT;
+EXEC Statement_1 4, '2018-10-28', '17:55', '19:20', 'РЎРЈ 6032', 3645, 3, 'LED', @status = @status_out OUTPUT;
 PRINT @status_out;
 GO
 
-/*Заявление мест*/
+/*Р—Р°СЏРІР»РµРЅРёРµ РјРµСЃС‚*/
 EXEC Statement_2 1, 'A1', 2;
 EXEC Statement_2 1, 'A2', 2;
 EXEC Statement_2 1, 'A3', 2;
@@ -1121,7 +1121,7 @@ EXEC Statement_2 5, 'D27', 3;
 EXEC Statement_2 5, 'D28', 3;
 GO
 
-/*Добавление данных о пассажирах*/
+/*Р”РѕР±Р°РІР»РµРЅРёРµ РґР°РЅРЅС‹С… Рѕ РїР°СЃСЃР°Р¶РёСЂР°С…*/
 DECLARE @status_out varchar(50);
 
 EXEC Statement_3 1, 'Hoover', 'Richard', NULL, '1968-02-10', 553763261, 2, 1, @status = @status_out OUTPUT;
@@ -1252,7 +1252,7 @@ EXEC Statement_3 1, 'Lucas', 'Arnold', NULL, '1989-04-01', 630887541, 3, 5, @sta
 PRINT @status_out;
 EXEC Statement_3 1, 'Snow', 'Steven', NULL, '1991-12-10', 512648304, 3, 2, @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_3 1, 'O’Connor', 'Donald', NULL, '1996-04-14', 577617705, 3, 4, @status = @status_out OUTPUT;
+EXEC Statement_3 1, 'OвЂ™Connor', 'Donald', NULL, '1996-04-14', 577617705, 3, 4, @status = @status_out OUTPUT;
 PRINT @status_out;
 EXEC Statement_3 1, 'Logan', 'Mark', NULL, '1997-02-21', 658827873, 3, 5, @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -1330,7 +1330,7 @@ EXEC Statement_3 1, 'Freeman', 'George', NULL, '1958-12-24', 540475020, 3, 4, @s
 PRINT @status_out;
 EXEC Statement_3 1, 'Gilbert', 'John', NULL, '1959-12-26', 863549750, 3, 3, @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_3 1, 'Lawrence', 'Williamя', NULL, '1960-02-06', 765136675, 3, 5, @status = @status_out OUTPUT;
+EXEC Statement_3 1, 'Lawrence', 'WilliamСЏ', NULL, '1960-02-06', 765136675, 3, 5, @status = @status_out OUTPUT;
 PRINT @status_out;
 EXEC Statement_3 1, 'Fleming', 'Brice', NULL, '1962-08-27', 990703130, 3, 2, @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -1666,7 +1666,7 @@ EXEC Statement_3 3, 'Inese', 'Apala', NULL, '1991-01-10', '781616265', 3, 10, @s
 PRINT @status_out;
 EXEC Statement_3 3, 'Eve', 'Eglitise', NULL, '1991-09-03', '683337589', 3, 10, @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_3 3, 'Ilze', 'Petersonе', NULL, '1994-01-15', '285205817', 3, 12, @status = @status_out OUTPUT;
+EXEC Statement_3 3, 'Ilze', 'PetersonРµ', NULL, '1994-01-15', '285205817', 3, 12, @status = @status_out OUTPUT;
 PRINT @status_out;
 EXEC Statement_3 3, 'Lajma', 'Podniece', NULL, '1996-06-26', '409508780', 3, 10, @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -1674,7 +1674,7 @@ EXEC Statement_3 3, 'Ilga', 'Apala', NULL, '1996-07-30', '835022669', 3, 11, @st
 PRINT @status_out;
 EXEC Statement_3 3, 'Lige', 'Eglitise', NULL, '1996-11-26', '831660704', 3, 11, @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_3 3, 'Ceriba', 'Petersonе', NULL, '1997-11-19', '960284576', 3, 12, @status = @status_out OUTPUT;
+EXEC Statement_3 3, 'Ceriba', 'PetersonРµ', NULL, '1997-11-19', '960284576', 3, 12, @status = @status_out OUTPUT;
 PRINT @status_out;
 EXEC Statement_3 3, 'Mariya', 'Alunane', NULL, '2000-09-19', '937414029', 3, 10, @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -1845,7 +1845,7 @@ EXEC Statement_3 4, 'Charpentier', 'Jean-Claude', NULL, '1986-12-21', '634890037
 PRINT @status_out;
 EXEC Statement_3 4, 'Lortie', 'Flavien', NULL, '1987-07-21', '453403199', 3, 2, @status = @status_out OUTPUT;
 PRINT @status_out;
-EXEC Statement_3 4, 'Brunelleй', 'Martin', NULL, '1988-02-25', '540595914', 3, 2, @status = @status_out OUTPUT;
+EXEC Statement_3 4, 'BrunelleР№', 'Martin', NULL, '1988-02-25', '540595914', 3, 2, @status = @status_out OUTPUT;
 PRINT @status_out;
 EXEC Statement_3 4, 'Richard', 'Laurent', NULL, '1990-01-14', '225284168', 3, 2, @status = @status_out OUTPUT;
 PRINT @status_out;
@@ -2357,15 +2357,15 @@ GO
 
 
 
---Заполняемое на меcте
-/*Установка запланированных значений времени*/
+--Р—Р°РїРѕР»РЅСЏРµРјРѕРµ РЅР° РјРµcС‚Рµ
+/*РЈСЃС‚Р°РЅРѕРІРєР° Р·Р°РїР»Р°РЅРёСЂРѕРІР°РЅРЅС‹С… Р·РЅР°С‡РµРЅРёР№ РІСЂРµРјРµРЅРё*/
 EXEC Planned 1, '06:40', '09:00', '09:40', '13:30';
 EXEC Planned 2, '10:10', '10:35', '10:20', '14:00';
 EXEC Planned 3, '10:05', '10:20', '10:30', '12:10';
 EXEC Planned 4, '14:55', '15:20', '15:30', '18:40';
 EXEC Planned 5, '17:30', '17:40', '17:55', '19:20';
 
-/*Установка планки перегруза для каждого рейса*/
+/*РЈСЃС‚Р°РЅРѕРІРєР° РїР»Р°РЅРєРё РїРµСЂРµРіСЂСѓР·Р° РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР№СЃР°*/
 EXEC Overweight_setup 1, 14.0;
 EXEC Overweight_setup 2, 13.0;
 EXEC Overweight_setup 3, 13.0;
@@ -2373,7 +2373,7 @@ EXEC Overweight_setup 4, 14.0;
 EXEC Overweight_setup 5, 12.0;
 GO
 
-/*Присваивание стойки регистрации каждому пассажиру*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ СЃС‚РѕР№РєРё СЂРµРіРёСЃС‚СЂР°С†РёРё РєР°Р¶РґРѕРјСѓ РїР°СЃСЃР°Р¶РёСЂСѓ*/
 EXEC Registration_desk_setup 1, 1;
 EXEC Registration_desk_setup 1, 2;
 EXEC Registration_desk_setup 2, 3;
@@ -2383,7 +2383,7 @@ EXEC Registration_desk_setup 4, 8;
 EXEC Registration_desk_setup 5, 9;
 GO
 
-/*Присваивание гейта каждому рейсу*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ РіРµР№С‚Р° РєР°Р¶РґРѕРјСѓ СЂРµР№СЃСѓ*/
 EXEC Gate_setup 1, 9;
 EXEC Gate_setup 2, 3;
 EXEC Gate_setup 2, 4;
@@ -2393,7 +2393,7 @@ EXEC Gate_setup 4, 7;
 EXEC Gate_setup 5, 10;
 GO
 
-/*Начало регистрации*/
+/*РќР°С‡Р°Р»Рѕ СЂРµРіРёСЃС‚СЂР°С†РёРё*/
 EXEC Reg_begin 1, '06:40';
 EXEC Reg_begin 2, '10:20';
 EXEC Reg_begin 3, '10:00';
@@ -2401,7 +2401,7 @@ EXEC Reg_begin 4, '15:10';
 EXEC Reg_begin 5, '18:04';
 GO
 
-/*Регистрация пассажира на рейс*/
+/*Р РµРіРёСЃС‚СЂР°С†РёСЏ РїР°СЃСЃР°Р¶РёСЂР° РЅР° СЂРµР№СЃ*/
 DECLARE @status_out varchar(50);
 
 EXEC Passenger_registration 1, 1, @status = @status_out OUTPUT;
@@ -3630,7 +3630,7 @@ EXEC Passenger_registration 612, 612, @status = @status_out OUTPUT;
 PRINT @status_out;
 GO
 
-/*Регистрация багажа*/
+/*Р РµРіРёСЃС‚СЂР°С†РёСЏ Р±Р°РіР°Р¶Р°*/
 DECLARE @pass_status_out varchar(50);
 DECLARE @luggage_status_out varchar(50);
 
@@ -5475,7 +5475,7 @@ PRINT @pass_status_out;
 PRINT @luggage_status_out;
 GO
 
-/*Конец регистрации*/
+/*РљРѕРЅРµС† СЂРµРіРёСЃС‚СЂР°С†РёРё*/
 EXEC Reg_end 1, '08:50';
 EXEC Reg_end 2, '09:47';
 EXEC Reg_end 3, '09:52';
@@ -5483,7 +5483,7 @@ EXEC Reg_end 4, '14:30';
 EXEC Reg_end 5, '17:15';
 GO
 
-/*Присваивание гейта каждому пассажиру*/
+/*РџСЂРёСЃРІР°РёРІР°РЅРёРµ РіРµР№С‚Р° РєР°Р¶РґРѕРјСѓ РїР°СЃСЃР°Р¶РёСЂСѓ*/
 EXEC Passenger_gate 1, 9;
 EXEC Passenger_gate 2, 9;
 EXEC Passenger_gate 3, 9;
@@ -6098,7 +6098,7 @@ EXEC Passenger_gate 611, 10;
 EXEC Passenger_gate 612, 10;
 GO
 
-/*Начало посадки*/
+/*РќР°С‡Р°Р»Рѕ РїРѕСЃР°РґРєРё*/
 EXEC Boarding_begin 1, '09:05';
 EXEC Boarding_begin 2, '10:10';
 EXEC Boarding_begin 3, '10:07';
@@ -6106,7 +6106,7 @@ EXEC Boarding_begin 4, '15:00';
 EXEC Boarding_begin 5, '17:35';
 GO
 
-/*Конец посадки*/
+/*РљРѕРЅРµС† РїРѕСЃР°РґРєРё*/
 EXEC Boarding_end 1, '09:25', '09:20';
 EXEC Boarding_end 2, '10:35', '10:30';
 EXEC Boarding_end 3, '10:30', '10:25';
@@ -6114,7 +6114,7 @@ EXEC Boarding_end 4, '15:25', '15:23';
 EXEC Boarding_end 5, '17:47', '17:42';
 GO
 
-/*Вылет*/
+/*Р’С‹Р»РµС‚*/
 EXEC Departure 1, '09:50';
 EXEC Departure 2, '10:40';
 EXEC Departure 3, '10:35';
@@ -6122,7 +6122,7 @@ EXEC Departure 4, '15:35';
 EXEC Departure 5, '19:01';
 GO
 
-/*Прилёт*/
+/*РџСЂРёР»С‘С‚*/
 EXEC Arrival 1, '13:43';
 EXEC Arrival 2, '14:27';
 EXEC Arrival 3, '12:31';

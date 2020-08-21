@@ -1,4 +1,4 @@
---Потеря изменений "без потери" часть 1
+--РџРѕС‚РµСЂСЏ РёР·РјРµРЅРµРЅРёР№ "Р±РµР· РїРѕС‚РµСЂРё" С‡Р°СЃС‚СЊ 1
 USE Airport
 
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED
