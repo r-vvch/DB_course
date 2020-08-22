@@ -19,3 +19,8 @@
 - [6 лаба](https://github.com/r-vvch/DB_course/tree/master/6_lab) — Управление транзакциями
 - [8 лаба](https://github.com/r-vvch/DB_course/tree/master/8_lab) — Выборка метаданных
 - [10 лаба](https://github.com/r-vvch/DB_course/tree/master/10_lab) — Использование индексов и средств оптимизации запросов
+
+<details>
+  <summary>Доп</summary>
+- [Доп](https://github.com/r-vvch/DB_course/tree/master/dop) — Доп по подключению SQL к Java и созданию веб-приложения с выводом расписания вылетов
+</details>  

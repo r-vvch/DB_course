@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Выбор</title>
+</head>
+<body>
+<form name="Select" method="post" action="TestServlet">
+    <p>
+        <label for="date">Дата:</label>
+        <input id="date" max="2019-03-24" value="2018-10-28" type="date" name="date">
+    </p>
+    <p>
+        <label for="from">Время с:</label>
+        <input id="from" max="23:59" value="00:00" type="time" name="from">
+        <label for="to"> по:</label>
+        <input id="to" max="23:59" value="23:59" type="time" name="to">
+    </p>
+    <input type="submit" value="Показать" />
+</form>
+</body>
+<html>
