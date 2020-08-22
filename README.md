@@ -26,7 +26,7 @@
 	<li><p><a href="https://github.com/r-vvch/DB_course/tree/master/dop">Доп</a> — Доп по подключению SQL к Java и созданию веб-приложения с выводом расписания вылетов</li></p>
   </ul>
   <p>
-    <a href="https://github.com/r-vvch/DB_course/blob/master/dop/Select.png">Запрос</a>
+    <a href="https://github.com/r-vvch/DB_course/blob/master/dop/Select.png">Запрос</a><br>
     <a href="https://github.com/r-vvch/DB_course/blob/master/dop/Output.png">Вывод</a>
   </p>
   
