@@ -9,24 +9,24 @@
 
 <details>
   <summary>Схема спроектированной в результате базы</summary>
-  <img src="https://github.com/r-vvch/DB_course/blob/master/2_lab/%D0%A1%D1%85%D0%B5%D0%BC%D0%B0.png">
+  <img src="2_lab/Схема.png" alt="Схема БД">
 </details>  
 
-- [1 лаба](https://github.com/r-vvch/DB_course/tree/master/1_lab) — Запросы в базу данных
-- [2 лаба](https://github.com/r-vvch/DB_course/tree/master/2_lab) — Проектирование базы данных
-- [3 лаба](https://github.com/r-vvch/DB_course/tree/master/3_lab) — Создание базы данных 
-- [5 лаба](https://github.com/r-vvch/DB_course/tree/master/5_lab) — Создание и использование представлений
-- [6 лаба](https://github.com/r-vvch/DB_course/tree/master/6_lab) — Управление транзакциями
-- [8 лаба](https://github.com/r-vvch/DB_course/tree/master/8_lab) — Выборка метаданных
-- [10 лаба](https://github.com/r-vvch/DB_course/tree/master/10_lab) — Использование индексов и средств оптимизации запросов
+- [1 лаба](https://github.com/r-vvch/DB_course/tree/master/1_lab) — запросы в базу данных
+- [2 лаба](https://github.com/r-vvch/DB_course/tree/master/2_lab) — проектирование базы данных
+- [3 лаба](https://github.com/r-vvch/DB_course/tree/master/3_lab) — создание базы данных 
+- [5 лаба](https://github.com/r-vvch/DB_course/tree/master/5_lab) — создание и использование представлений
+- [6 лаба](https://github.com/r-vvch/DB_course/tree/master/6_lab) — управление транзакциями
+- [8 лаба](https://github.com/r-vvch/DB_course/tree/master/8_lab) — выборка метаданных
+- [10 лаба](https://github.com/r-vvch/DB_course/tree/master/10_lab) — использование индексов и средств оптимизации запросов
+
+[Доп](https://github.com/r-vvch/DB_course/tree/master/dop) — подключение SQL к Java и создание веб-приложения на Tomcat с выводом расписания вылетов
 
 <details>
-  <summary>Доп</summary>
-  <ul>
-	<li><p><a href="https://github.com/r-vvch/DB_course/tree/master/dop">Доп</a> — подключение SQL к Java и создание веб-приложения с выводом расписания вылетов</li></p>
-  </ul>
-  <p style="margin-left: 30px">
-    Пример <a href="https://github.com/r-vvch/DB_course/blob/master/dop/Select.png">запроса</a> и <a href="https://github.com/r-vvch/DB_course/blob/master/dop/Output.png">вывода</a>
+  <summary>Пример запроса и вывода</summary>
+  <p>
+    <img src="dop/Select.png" alt="Запрос">
+    <img src="dop/Output.png" alt="Вывод">
   </p>
   
 </details>  
